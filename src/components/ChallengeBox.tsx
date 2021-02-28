@@ -1,31 +1,32 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/ChallengeBox.module.css';
 
-export function ChallengeBox(){
-  const [hasActiveChallenge, setHasActiveChallenge] = useState(true);
+export function ChallengeBox() {
+  const { activeChallenge, resetChallenge } = useContext(ChallengesContext);
 
-  return(
+  return (
     <div className={styles.challengeBoxContainer}>
-      { hasActiveChallenge ?
+      { activeChallenge ?
         (
           <div className={styles.challengeBoxActive}>
-            <header>Ganhe 400xp</header>
+            <header>Ganhe {activeChallenge.amount} xp</header>
             <main>
-              <img src="icons/body.svg" alt="Pesos"/>
+              <img src={`icons/${activeChallenge.type}.svg`} alt={activeChallenge.type} />
               <strong>Novo desafio</strong>
-              <p>Levante e faça uma caminhada de 3 minutos.</p>
+              <p>{activeChallenge.description}</p>
             </main>
             <footer>
-              <button type="button" className={styles.challengeFailedButton}>Falhei</button>
+              <button type="button" className={styles.challengeFailedButton} onClick={resetChallenge}>Falhei</button>
               <button type="button" className={styles.challengeSuccededButton}>Completei</button>
             </footer>
           </div>
         )
-      :
+        :
         (<div className={styles.challengeBoxNotActive}>
           <strong>Finalize um ciclo para receber um desafio</strong>
           <p>
-            <img src="icons/level-up.svg" alt="Level Up"/>
+            <img src="icons/level-up.svg" alt="Level Up" />
             Avance de level completando desafios.
           </p>
         </div>)
