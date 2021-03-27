@@ -7,16 +7,16 @@ import { CompletedChallenges } from '../components/CompletedChallenges';
 import { Countdown } from '../components/Countdown';
 import { ChallengeBox } from '../components/ChallengeBox';
 
-import { ChallengesProvider } from '../contexts/ChallengesContext';
+import { CountdownProvider } from '../contexts/CountdownContext';
 
 export default function Home() {
   return (
-    <ChallengesProvider>
-      <div className={styles.container}>
-        <Head>
-          <title>MoveIt! - NLW #4</title>
-        </Head>
-        <ExperienceBar />
+    <div className={styles.container}>
+      <Head>
+        <title>MoveIt! - NLW #4</title>
+      </Head>
+      <ExperienceBar />
+      <CountdownProvider>
         <section>
           <div>
             <Profile />
@@ -27,7 +27,7 @@ export default function Home() {
             <ChallengeBox />
           </div>
         </section>
-      </div>
-    </ChallengesProvider>
+      </ CountdownProvider>
+    </div>
   )
 }
